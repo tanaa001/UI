@@ -1,6 +1,6 @@
 <template>
   <div class="main-color">
-    <base-head />
+    <base-header />
     <h2 class="md-title">schedule</h2>
 
 
@@ -22,12 +22,11 @@
 </template>
 
 <script>
-import baseHead from '@/components/modules/base-head'
-import router from '../router'
+import baseHead from '@/components/modules/base-header'
 export default {
   name: 'scheduleDetails',
   components: {
-    baseHead: 'base-head'
+    baseHead: 'base-header'
   },
   methods: {
     next_page :function(){

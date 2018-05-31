@@ -1,9 +1,3 @@
-<style scoped>
-.red {
-  background-color: red;
-}
-</style>
-
 <template>
   <div>
 
@@ -65,7 +59,7 @@
 <script>
 import router from '@/router'
 	export default {
-		name: 'header',
+		name: 'base-header',
     methods: {
       nextp: function(ntype) {
         if(ntype == 'main'){
@@ -81,10 +75,18 @@ import router from '@/router'
         mini: false,
         right: null,
         items: [
-          { title: 'Home', icon: 'dashboard' },
-          { title: 'About', icon: 'question_answer' }
+          { title: 'Home', icon: 'dashboard' }
+          ,{ title: 'member', icon: 'group' }
+          ,{ title: 'Achievement', icon: 'insert_chart_outlined' }
+          ,{ title: 'mypage', icon: 'accessibility_new' }
+          ,{ title: 'logout', icon: 'exit_to_app' }
         ]
 			}
 		}
 	}
 </script>
+<style scoped>
+.red {
+  background-color: red;
+}
+</style>

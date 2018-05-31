@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Main from '@/components/Main'
+import login from '@/components/login'
+import mainContent from '@/components/main-content'
 import ScheduleDetails from '@/components/ScheduleDetails'
 import test from '@/components/test'
 
@@ -14,13 +14,13 @@ export default new Router({
   routes: [
   {
   	path: '/',
-  	name: 'Login',
-  	component: Login
+  	name: 'login',
+  	component: login
   },
   {
   	path: '/main',
-  	name: 'Main',
-  	component: Main
+  	name: 'main-content',
+  	component: mainContent
   },
   {
   	path: '/scheduleDetails',
