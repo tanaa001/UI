@@ -1,7 +1,7 @@
 <template>
 <div>
-    <base-header />
   <v-container fluid grid-list-md>
+  <base-header />
     <v-layout row wrap>
       <v-flex d-flex xs6 sm6 md3>
         <v-card color="purple" dark>
@@ -17,7 +17,12 @@
       </v-flex>
       <v-flex d-flex xs12 sm6 md6>
         <v-card color="indigo" dark>
-          <v-card-text>スケジュール</v-card-text>
+          <v-card-text>スケジュール
+            <v-btn icon class="mx-0" @click="">
+              <v-icon color="teal">add_circle</v-icon>
+            </v-btn>
+          </v-card-text>
+
           <v-data-table
             :headers="headers"
             :items="users"
@@ -30,9 +35,16 @@
               <td class="text-xs-right">{{ props.item.category }}</td>
               <td class="text-xs-right">{{ props.item.place }}</td>
               <td class="justify-center layout px-0">
-                <v-btn icon class="mx-0" @click="">
-                  <v-icon color="teal">toys</v-icon>
-                </v-btn>
+                <v-menu bottom offset-y>
+                  <v-btn icon class="mx-0" slot="activator">
+                    <v-icon color="teal">toys</v-icon>
+                  </v-btn>
+                  <v-list>
+                    <v-list-tile v-for="(item, i) in item_list" :key="i" @click="">
+                      <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+                    </v-list-tile>
+                  </v-list>
+                </v-menu>
               </td>
             </template>
           </v-data-table>
@@ -46,7 +58,7 @@
               <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
               <v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>
               <v-list-tile v-else :key="item.title" avatar @click="">
-                <v-list-tile-avatar>
+                <v-list-tile-avatar class="number-style">
                   <img src="https://placeimg.com/40/40/people/5">
                 </v-list-tile-avatar>
                 <v-list-tile-content>
@@ -111,7 +123,20 @@ export default {
         { avatar: '/static/doc-images/lists/3.jpg', title: 'Oui oui', subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?" }
       ]
 
-
+        ,item_list: [
+          {
+            title: 'Click Me'
+          },
+          {
+            title: 'Click Me'
+          },
+          {
+            title: 'Click Me'
+          },
+          {
+            title: 'Click Me 2'
+          }
+        ]
     }
   }
 }

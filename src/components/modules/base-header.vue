@@ -1,8 +1,7 @@
 <template>
   <div>
-
     <v-container>
-          <v-toolbar color="orange darken-3" dark fixed app>
+          <v-toolbar color="orange darken-3" dark fixed clipped app>
             <v-toolbar-side-icon @click.stop="drawer = !drawer" dark></v-toolbar-side-icon>
             <v-toolbar-title>HEADER</v-toolbar-title>
             <v-spacer></v-spacer>
