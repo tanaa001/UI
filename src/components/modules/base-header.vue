@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <v-container class="header-style">
     <v-container>
-          <v-toolbar color="orange darken-3" dark fixed clipped app>
+          <v-toolbar color="orange darken-3" dark fixed clipped app >
             <v-toolbar-side-icon @click.stop="drawer = !drawer" dark></v-toolbar-side-icon>
             <v-toolbar-title>HEADER</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -52,7 +52,7 @@
       </v-list>
     </v-navigation-drawer>
 
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -87,5 +87,17 @@ import router from '@/router'
 <style scoped>
 .red {
   background-color: red;
+}
+@media screen and (max-width: 960px) {
+   /* 表示領域が320px以下の場合に適用するスタイル */
+   .header-style {
+    height: 48px; padding: 0px;
+  }
+}
+@media screen and (max-width: 603px) {
+   /* 表示領域が320px以下の場合に適用するスタイル */
+   .header-style {
+    height: 56px; padding: 0px;
+  }
 }
 </style>
