@@ -18,14 +18,16 @@
           </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm6 md6>
-          <v-card color="indigo" dark>
-            <v-card-text>スケジュール
+          <v-card color="indigo" dark>            
+            <v-card-text>
+              <v-icon color="teal">calendar_today</v-icon>
+              schedule
               <v-btn icon class="mx-0" @click="">
-                <v-icon color="teal">add_circle</v-icon>
+              <v-icon color="teal">add_circle</v-icon>
               </v-btn>
             </v-card-text>
 
-            <v-data-table
+<!--             <v-data-table
               :headers="headers"
               :items="users"
               hide-actions
@@ -49,34 +51,35 @@
                   </v-menu>
                 </td>
               </template>
-            </v-data-table>
+            </v-data-table> -->
           </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm6 md6 child-flex>
           <v-card color="green lighten-2" dark>
-            <v-card-text>メンバーリスト</v-card-text>
+            <v-card-text>member-list</v-card-text>
             <v-list two-line>
-              <template v-for="(item, index) in items">
-                <v-subheader v-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
-                <v-divider v-else-if="item.divider" :inset="item.inset" :key="index"></v-divider>
-                <v-list-tile v-else :key="item.title" avatar @click="">
+              <template v-for="(item, index) in this.$store.state.menberList">
+                <v-list-tile avatar @click="">
                   <v-list-tile-avatar class="number-style">
                     <img src="https://placeimg.com/40/40/people/5">
                   </v-list-tile-avatar>
                   <v-list-tile-content>
-                    <v-list-tile-title v-html="item.title"></v-list-tile-title>
-                    <v-list-tile-sub-title v-html="item.subtitle"></v-list-tile-sub-title>
+                    <v-list-tile-title v-html="item.name"></v-list-tile-title>
+                    <v-list-tile-sub-title v-html="item.position"></v-list-tile-sub-title>
+                    <v-list-tile-sub-title v-html="item.user_comment"></v-list-tile-sub-title>
                   </v-list-tile-content>
                 </v-list-tile>
+                <v-divider></v-divider>
               </template>
             </v-list>
           </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm12 md6>
           <v-card color="blue lighten-2" dark>
-            <v-card-text>{{ lorem2 }}</v-card-text>
+            <v-card-text>{{ this.$store.state.menberList }}</v-card-text>
           </v-card>
         </v-flex>
+        <v-btn color="success"@click="test">login</v-btn>
       </v-layout>
   </v-container>
 </div>
@@ -84,25 +87,52 @@
 
 <script>
 import baseHeader from '@/components/modules/base-header'
-import { USER_LIST } from '../store/mutation-types'
+import { USER_LIST, MENBER_LIST } from '../store/mutation-types'
   
 export default {
   name: 'main-content',
   components: {
     baseHeader
   },
+    watch: {
+
+    },
+
+
+
   methods: {
+
+    test: function(){
+      this.menberList = this.$store.state.menberList
+
+    },
+
+
+
+
     next_page :function(){
       this.$router.push('scheduleDetails')
     }
   },
-  beforeCreate () {
-    this.$store.dispatch('USER_LIST')
+  mounted () {
+    let userItem = {
+      password: "sss"
+      ,name: "cccc"
+    }
+    this.$store.dispatch('MENBER_LIST',userItem)
+    Vue.nextTick(function() {
+      this.menberList = this.$store.state.menberList
+      vue.$forceUpdate();
+    })
+            this.$store.watch(this.$store.menberList, n => {
+                this.menberList = this.$store.state.menberList
+
+            })
   },
   data: function () {
     return{
       dialog: false
-      ,users: this.$store.state.userList
+      ,menberList: this.$store.state.menberList
       ,headers: [
         { text: 'date', value: 'date' }
         ,{ text: 'category', value: 'category' }
@@ -112,14 +142,11 @@ export default {
 
       ,lorem1: `画像`
       ,lorem2: `Lorem ipsum dolor sit amet, mel at clita quando. Te sit oratio vituperatoribus, nam ad ipsum nec cu, alienum argumentum ius ad. Pri eu justo aeque torquatos.`
-        ,items: [
-        { header: 'member-list' },
+      ,items: [
         { avatar: '/static/doc-images/lists/1.jpg', title: 'Brunch this weekend?', subtitle: "<span class='text--primary'>Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?" },
-        { divider: true, inset: true },
         { avatar: '/static/doc-images/lists/2.jpg', title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>', subtitle: "<span class='text--primary'>to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend." },
-        { divider: true, inset: true },
         { avatar: '/static/doc-images/lists/3.jpg', title: 'Oui oui', subtitle: "<span class='text--primary'>Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?" }
-      ]
+    ]
 
         ,item_list: [
           {

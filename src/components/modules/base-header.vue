@@ -17,7 +17,7 @@
       :mini-variant="mini"
       dark
       absolute
-      style="background-color:#263238;"
+      style="background-color:#78909C;"
     >
       <v-list class="pa-1">
         <v-list-tile v-if="mini" @click.stop="mini = !mini">
@@ -89,13 +89,11 @@ import router from '@/router'
   background-color: red;
 }
 @media screen and (max-width: 960px) {
-   /* 表示領域が320px以下の場合に適用するスタイル */
    .header-style {
     height: 48px; padding: 0px;
   }
 }
 @media screen and (max-width: 603px) {
-   /* 表示領域が320px以下の場合に適用するスタイル */
    .header-style {
     height: 56px; padding: 0px;
   }
