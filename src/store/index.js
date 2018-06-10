@@ -7,6 +7,7 @@ import {
 	,LOGIN_USER
 	,ADD_USER
 	,MENBER_LIST
+	,SCHEDULE_LIST
 } from '../store/mutation-types'
 
 Vue.use(Vuex)
@@ -34,6 +35,7 @@ export default new Vuex.Store({
 		,loginUser: []
 		,addUser: []
 		,menberList: []
+		,scheduleList: []
 	}
 	,actions: {
 		[LOGIN_USER] ({ commit }, params) {
@@ -68,6 +70,9 @@ export default new Vuex.Store({
 				state.addUser = error
 			})
 		}
+		,[SCHEDULE_LIST] ({ commit }, params) {
+			commit(SCHEDULE_LIST)
+		}
 	}
 	,mutations: {
 		[LOGIN_USER] (state, params) {
@@ -86,42 +91,45 @@ export default new Vuex.Store({
 			console.log(JSON.stringify(params))
 		}
 		,[MENBER_LIST] (state, params) {
-		// var users = [
-		// 	{
-		// 		date: "2018/03/22",
-		// 		category: "type-a",
-		// 		place: "山田電機屋上"
-		// 	},
-		// 	{
-		// 		date: "2018/04/13",
-		// 		category: "type-b",
-		// 		place: "豊洲",
-		// 	},
-		// 	{
-		// 		date: "2018/02/12",
-		// 		category: "type-a",
-		// 		place: "高円寺"
-		// 	},
-		// 	{
-		// 		date: "2018/02/12",
-		// 		category: "type-a",
-		// 		place: "高円寺"
-		// 	},
-		// 	{
-		// 		date: "2018/02/12",
-		// 		category: "type-a",
-		// 		place: "高円寺"
-		// 	},
-		// 	{
-		// 		date: "2018/05/04",
-		// 		category: "type-c",
-		// 		place: "豊洲"
-		// 	}
-		// ]
 		console.log("xx")
 		console.log(JSON.stringify(params))
 		console.log("xx")
 		state.menberList = params
+		}
+		,[SCHEDULE_LIST] (state, params) {
+		var schedule = [
+			{
+				date: "2018/03/22",
+				category: "type-a",
+				place: "山田電機屋上"
+			},
+			{
+				date: "2018/04/13",
+				category: "type-b",
+				place: "豊洲",
+			},
+			{
+				date: "2018/02/12",
+				category: "type-a",
+				place: "高円寺"
+			},
+			{
+				date: "2018/02/12",
+				category: "type-a",
+				place: "高円寺"
+			},
+			{
+				date: "2018/02/12",
+				category: "type-a",
+				place: "高円寺"
+			},
+			{
+				date: "2018/05/04",
+				category: "type-c",
+				place: "豊洲"
+			}
+		]
+		state.scheduleList = schedule
 		}
 	}
 })

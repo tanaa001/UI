@@ -3,6 +3,7 @@
 
     <base-header></base-header>
     <v-container fluid grid-list-md>
+      
 
       <v-layout row wrap>
         <v-flex d-flex xs6 sm6 md3>
@@ -18,41 +19,7 @@
           </v-card>
         </v-flex>
         <v-flex d-flex xs12 sm6 md6>
-          <v-card color="indigo" dark>            
-            <v-card-text>
-              <v-icon color="teal">calendar_today</v-icon>
-              schedule
-              <v-btn icon class="mx-0" @click="">
-              <v-icon color="teal">add_circle</v-icon>
-              </v-btn>
-            </v-card-text>
-
-<!--             <v-data-table
-              :headers="headers"
-              :items="users"
-              hide-actions
-              color="indigo"
-              class="elevation-1"
-            >
-              <template slot="items" slot-scope="props" color="indigo">
-                <td class="text-xs-right">{{ props.item.date }}</td>
-                <td class="text-xs-right">{{ props.item.category }}</td>
-                <td class="text-xs-right">{{ props.item.place }}</td>
-                <td class="justify-center layout px-0">
-                  <v-menu bottom offset-y>
-                    <v-btn icon class="mx-0" slot="activator">
-                      <v-icon color="teal">toys</v-icon>
-                    </v-btn>
-                    <v-list>
-                      <v-list-tile v-for="(item, i) in item_list" :key="i" @click="">
-                        <v-list-tile-title>{{ item.title }}</v-list-tile-title>
-                      </v-list-tile>
-                    </v-list>
-                  </v-menu>
-                </td>
-              </template>
-            </v-data-table> -->
-          </v-card>
+          <main-content-schedule></main-content-schedule>
         </v-flex>
         <v-flex d-flex xs12 sm6 md6 child-flex>
           <v-card color="green lighten-2" dark>
@@ -87,28 +54,21 @@
 
 <script>
 import baseHeader from '@/components/modules/base-header'
-import { USER_LIST, MENBER_LIST } from '../store/mutation-types'
+import mainContentSchedule from '@/components/modules/main-content-schedule'
+import { USER_LIST, MENBER_LIST, SCHEDULE_LIST } from '../store/mutation-types'
   
 export default {
   name: 'main-content',
   components: {
     baseHeader
+    ,mainContentSchedule
   },
-    watch: {
-
-    },
-
-
-
   methods: {
 
     test: function(){
-      this.menberList = this.$store.state.menberList
+      this.scheduleList = this.$store.state.scheduleList
 
     },
-
-
-
 
     next_page :function(){
       this.$router.push('scheduleDetails')
@@ -119,24 +79,28 @@ export default {
       password: "sss"
       ,name: "cccc"
     }
+    console.log("aaa")
     this.$store.dispatch('MENBER_LIST',userItem)
-    Vue.nextTick(function() {
-      this.menberList = this.$store.state.menberList
-      vue.$forceUpdate();
-    })
-            this.$store.watch(this.$store.menberList, n => {
-                this.menberList = this.$store.state.menberList
+    this.$store.dispatch('SCHEDULE_LIST')
+    this.scheduleList = this.$store.state.scheduleList
+    // Vue.nextTick(function() {
+    //   this.menberList = this.$store.state.menberList
+    //   vue.$forceUpdate();
+    // })
+            // this.$store.watch(this.$store.menberList, n => {
+            //     this.menberList = this.$store.state.menberList
 
-            })
+            // })
   },
   data: function () {
     return{
       dialog: false
       ,menberList: this.$store.state.menberList
+      ,scheduleList: this.$store.state.scheduleList
       ,headers: [
         { text: 'date', value: 'date' }
         ,{ text: 'category', value: 'category' }
-        ,{ text: 'place', value: 'place' }
+        // ,{ text: 'place', value: 'place' }
         ,{ text: 'actions', value: 'actions', sortable: false  }
       ]
 
@@ -169,5 +133,8 @@ export default {
 <style scoped>
   .main-color {
     background-color: #403C3B;
+  }
+  .flex-styel {
+    border: solid 2px red;
   }
 </style>
