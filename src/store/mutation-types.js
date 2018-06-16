@@ -1,6 +1,6 @@
 export const LOGIN_USER = 'LOGIN_USER'
 export const ADD_USER = 'ADD_USER'
-export const MENBER_LIST = 'MENBER_LIST'
+export const MEMBER_LIST = 'MEMBER_LIST'
 export const SCHEDULE_LIST = 'SCHEDULE_LIST'
 
 

@@ -6,7 +6,7 @@ import {
 	LOCAL_API
 	,LOGIN_USER
 	,ADD_USER
-	,MENBER_LIST
+	,MEMBER_LIST
 	,SCHEDULE_LIST
 } from '../store/mutation-types'
 
@@ -34,7 +34,7 @@ export default new Vuex.Store({
 		,userList: []
 		,loginUser: []
 		,addUser: []
-		,menberList: []
+		,memberList: []
 		,scheduleList: []
 	}
 	,actions: {
@@ -58,14 +58,14 @@ export default new Vuex.Store({
 				state.addUser = error
 			})
 		}
-		,[MENBER_LIST] ({ commit }, params) {
+		,[MEMBER_LIST] ({ commit }, params) {
 			console.log(params)
-			axioss.post('/menberList',params)
+			axioss.post('/memberList',params)
 			.then((response) => {
 				console.log("ddd")
 				console.log(response.data)
 				console.log("ddd")
-				commit(MENBER_LIST, response.data)
+				commit(MEMBER_LIST, response.data)
 			}).catch(error => {
 				state.addUser = error
 			})
@@ -90,11 +90,11 @@ export default new Vuex.Store({
 			state.addUser = params.response
 			console.log(JSON.stringify(params))
 		}
-		,[MENBER_LIST] (state, params) {
+		,[MEMBER_LIST] (state, params) {
 		console.log("xx")
 		console.log(JSON.stringify(params))
 		console.log("xx")
-		state.menberList = params
+		state.memberList = params
 		}
 		,[SCHEDULE_LIST] (state, params) {
 		var schedule = [
