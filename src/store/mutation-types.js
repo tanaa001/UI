@@ -3,7 +3,10 @@ export const ADD_USER = 'ADD_USER'
 export const MEMBER_LIST = 'MEMBER_LIST'
 export const SCHEDULE_LIST = 'SCHEDULE_LIST'
 
+
 export const TEST_LIST = 'TEST_LIST'
+
+
 
 export const TEST_API = 'http://localhost:3000/posts'
 
