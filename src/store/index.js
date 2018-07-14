@@ -77,27 +77,16 @@ export default new Vuex.Store({
 	,mutations: {
 		[LOGIN_USER] (state, params) {
 			state.loginUser = params.result
-			console.log("params.result")
-			console.log(params.result)
-			console.log("params.result")
-			// if(params.result == "true"){
-				
-			// }
-			console.log(JSON.stringify(params))
-			console.log(state.loginUser)
 		}
 		,[ADD_USER] (state, params) {
 			state.addUser = params.response
-			console.log(JSON.stringify(params))
 		}
 		,[MEMBER_LIST] (state, params) {
-		console.log("xx")
 		console.log(JSON.stringify(params))
-		console.log("xx")
 		state.memberList = params
 		}
 		,[SCHEDULE_LIST] (state, params) {
-		var schedule = [
+		let schedule = [
 			{
 				date: "2018/03/22",
 				category: "type-a",

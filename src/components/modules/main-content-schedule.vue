@@ -19,7 +19,7 @@
                 <td class="text-xs-right">{{ props.item.category }}</td>
                 <!-- <td class="text-xs-right">{{ props.item.place }}</td> -->
                 <td class="justify-center layout px-0">
-                    <v-btn icon class="mx-0">
+                    <v-btn icon class="mx-0" @click="dialog5 = true">
                         <v-icon color="teal">toys</v-icon>
                     </v-btn>
                 </td>
@@ -80,7 +80,7 @@
                                         id="testing"
                                         name="input-1"
                                     ></v-text-field>
-                             </v-list-tile-sub-title>
+                                </v-list-tile-sub-title>
                             </v-list-tile-content>
                         </v-list-tile>
                         <v-container fluid>
@@ -113,6 +113,50 @@
             </v-dialog>
 
         </v-dialog>
+
+        <!-- ステータス変更用ダイアログ -->
+        <v-dialog v-model="changeStatusDialog" persistent max-width="500px">
+            <v-card>
+                <v-card-title>
+                    <span class="headline">スケジュール詳細</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex xs6 sm6 md4>
+                                <v-text-field label="開催日" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs6 sm6 md4>
+                                <v-text-field label="開催場所" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field label="回答期限" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6 md4>
+                                <v-text-field
+                                name="input-1"
+                                label="備考"
+                                textarea
+                                dark
+                                ></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-select
+                                :items="['参加', '不参加']"
+                                label="回答ステータス"
+                                required
+                                ></v-select>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" flat @click.native="changeStatusDialog = false">Close</v-btn>
+                    <v-btn color="blue darken-1" flat @click.native="changeStatusDialog = false">Save</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
     </v-container>
 </template>
 
@@ -131,26 +175,23 @@ export default {
     },
     data: function () {
         return{
-            dialog1: false
+            scheduleList: this.$store.state.scheduleList
+            ,date: null
+            ,dialog1: false
             ,dialog2: false
-            ,scheduleList: this.$store.state.scheduleList
+            ,time: null
+            ,dialog: false
+            ,changeStatusDialog: false
+            ,notifications: false
+            ,sound: true
+            ,widgets: false
             ,headers: [
                 { text: 'date', value: 'date' }
                 ,{ text: 'category', value: 'category' }
                 // ,{ text: 'place', value: 'place' }
                 ,{ text: 'actions', value: 'actions', sortable: false    }
             ]
-
-            ,date: null
-            ,time: null,
-
-
-
-            dialog: false,
-            notifications: false,
-            sound: true,
-            widgets: false,
-            items: [
+            ,items: [
                 {
                     title: 'Click Me'
                 },
@@ -163,8 +204,8 @@ export default {
                 {
                     title: 'Click Me 2'
                 }
-            ],
-            select: [
+            ]
+            ,select: [
                 { text: 'State 1' },
                 { text: 'State 2' },
                 { text: 'State 3' },
