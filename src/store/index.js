@@ -17,7 +17,7 @@ let params = new URLSearchParams();
 const axioss = Axios.create({
 	baseURL: LOCAL_API
 	,headers: {
-		'content-Type': 'application/json'
+		'content-Type': 'application/json '
 		,'X-Requested-With': 'XMLHttpRequest'
 	}
 	,proxy: false
@@ -70,8 +70,15 @@ export default new Vuex.Store({
 				state.addUser = error
 			})
 		}
-		,[SCHEDULE_LIST] ({ commit }, params) {
-			commit(SCHEDULE_LIST)
+		,[SCHEDULE_LIST] ({ commit }, params) { 
+			axioss.post('/scheduleList',params) 
+			.then((response) => { 
+				console.log(response.data)
+			 commit(SCHEDULE_LIST, response.data) 
+			}).catch(error => { 
+				console.log("error")
+			 state.addUser = error 
+			}) 
 		}
 	}
 	,mutations: {
@@ -96,40 +103,11 @@ export default new Vuex.Store({
 		console.log("xx")
 		state.memberList = params
 		}
-		,[SCHEDULE_LIST] (state, params) {
-		var schedule = [
-			{
-				date: "2018/03/22",
-				category: "type-a",
-				place: "山田電機屋上"
-			},
-			{
-				date: "2018/04/13",
-				category: "type-b",
-				place: "豊洲",
-			},
-			{
-				date: "2018/02/12",
-				category: "type-a",
-				place: "高円寺"
-			},
-			{
-				date: "2018/02/12",
-				category: "type-a",
-				place: "高円寺"
-			},
-			{
-				date: "2018/02/12",
-				category: "type-a",
-				place: "高円寺"
-			},
-			{
-				date: "2018/05/04",
-				category: "type-c",
-				place: "豊洲"
-			}
-		]
-		state.scheduleList = schedule
+		,[SCHEDULE_LIST] (state, params) { 
+			state.scheduleList = params 
 		}
+
+
+		 
 	}
 })

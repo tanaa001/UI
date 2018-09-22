@@ -2,8 +2,8 @@
     <v-container fluid grid-list-md>
         <v-card-text>
             <v-icon color="teal">calendar_today</v-icon>
-            schedule
-            <v-btn icon class="mx-0" @click.stop="dialog = true">
+            schedule{{test}}
+            <v-btn icon class="mx-0" @click="getList(1)">
             <v-icon color="teal">add_circle</v-icon>
             </v-btn>
         </v-card-text>
@@ -15,11 +15,11 @@
             class="elevation-1"
         >
             <template slot="items" slot-scope="props" color="indigo">
-                <td class="text-xs-right">{{ props.item.date }}</td>
+                <td class="text-xs-right">{{ props.item.plan_date }}</td>
                 <td class="text-xs-right">{{ props.item.category }}</td>
                 <!-- <td class="text-xs-right">{{ props.item.place }}</td> -->
                 <td class="justify-center layout px-0">
-                    <v-btn icon class="mx-0">
+                    <v-btn icon class="mx-0" @click="getList(0)">
                         <v-icon color="teal">toys</v-icon>
                     </v-btn>
                 </td>
@@ -33,7 +33,7 @@
             transition="dialog-bottom-transition"
             scrollable
         >
-            <v-card tile>
+            <v-card tile>{{this.viewList}}
                 <v-toolbar card dark color="primary">
                     <v-btn icon dark @click.native="dialog = false">
                         <v-icon>close</v-icon>
@@ -79,6 +79,7 @@
                                     <v-text-field
                                         id="testing"
                                         name="input-1"
+                                        v-model="getTest[0].place"
                                     ></v-text-field>
                              </v-list-tile-sub-title>
                             </v-list-tile-content>
@@ -121,13 +122,37 @@ import { SCHEDULE_LIST } from '@/store/mutation-types'
     
 export default {
     name: 'main-content-schedule',
+    props:['test'],
     components: {
     },
     methods: {
+        getList (_type) {
+            this.dialog = true
+            console.log("_type")
+            console.log(_type)
+            if (_type === 0) {
+                this.viewList = this.scheduleList[0]
+            } else {
+                let item = {
+                    date: null,
+                    category: "adadadadada",
+                    place: null                    
+                }
+                this.viewList = item
+            }
+        }
+
     },
     mounted () {
-        this.$store.dispatch('SCHEDULE_LIST')
-        this.scheduleList = this.$store.state.scheduleList
+        let userItem = { 
+          password: this.passWord 
+          ,name: this.userName 
+        }
+        this.$store.dispatch('SCHEDULE_LIST', userItem)
+        this.$nextTick(function () { 
+             // DOM が更新されています 
+             this.scheduleList = this.$store.state.scheduleList
+        })
     },
     data: function () {
         return{
@@ -143,6 +168,12 @@ export default {
 
             ,date: null
             ,time: null,
+            getTest: "hhhhhhhh",
+            // getTest: this.test,
+            viewValue: null,
+
+            viewList:null,
+
 
 
 
