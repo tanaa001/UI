@@ -12,7 +12,7 @@ import {
 
 Vue.use(Vuex)
 
-let params = new URLSearchParams();
+let params = new URLSearchParams()
 
 const axioss = Axios.create({
 	baseURL: LOCAL_API
@@ -36,6 +36,11 @@ export default new Vuex.Store({
 		,addUser: []
 		,memberList: []
 		,scheduleList: []
+	},
+	getters: {
+		scheduleItems: state => {
+			return state.scheduleList
+		}
 	}
 	,actions: {
 		[LOGIN_USER] ({ commit }, params) {
@@ -50,7 +55,6 @@ export default new Vuex.Store({
 			})
 		}
 		,[ADD_USER] ({ commit }, params) {
-			console.log(params)
 			axioss.post('/adduser',params)
 			.then((response) => {
 				commit(ADD_USER, response.data)
@@ -59,77 +63,34 @@ export default new Vuex.Store({
 			})
 		}
 		,[MEMBER_LIST] ({ commit }, params) {
-			console.log(params)
 			axioss.post('/memberList',params)
 			.then((response) => {
-				console.log("ddd")
-				console.log(response.data)
-				console.log("ddd")
 				commit(MEMBER_LIST, response.data)
 			}).catch(error => {
 				state.addUser = error
 			})
 		}
 		,[SCHEDULE_LIST] ({ commit }, params) {
-			commit(SCHEDULE_LIST)
+			axioss.post('/scheduleList',params)
+			.then((response) => {
+				commit(SCHEDULE_LIST, response.data)
+			}).catch(error => {
+				state.addUser = error
+			})
 		}
 	}
 	,mutations: {
 		[LOGIN_USER] (state, params) {
 			state.loginUser = params.result
-			console.log("params.result")
-			console.log(params.result)
-			console.log("params.result")
-			// if(params.result == "true"){
-				
-			// }
-			console.log(JSON.stringify(params))
-			console.log(state.loginUser)
 		}
 		,[ADD_USER] (state, params) {
 			state.addUser = params.response
-			console.log(JSON.stringify(params))
 		}
 		,[MEMBER_LIST] (state, params) {
-		console.log("xx")
-		console.log(JSON.stringify(params))
-		console.log("xx")
-		state.memberList = params
+			state.memberList = params
 		}
 		,[SCHEDULE_LIST] (state, params) {
-		var schedule = [
-			{
-				date: "2018/03/22",
-				category: "type-a",
-				place: "山田電機屋上"
-			},
-			{
-				date: "2018/04/13",
-				category: "type-b",
-				place: "豊洲",
-			},
-			{
-				date: "2018/02/12",
-				category: "type-a",
-				place: "高円寺"
-			},
-			{
-				date: "2018/02/12",
-				category: "type-a",
-				place: "高円寺"
-			},
-			{
-				date: "2018/02/12",
-				category: "type-a",
-				place: "高円寺"
-			},
-			{
-				date: "2018/05/04",
-				category: "type-c",
-				place: "豊洲"
-			}
-		]
-		state.scheduleList = schedule
+			state.scheduleList = params
 		}
 	}
 })

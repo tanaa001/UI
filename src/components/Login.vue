@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
     <h1>{{title}}</h1>
+
+    {{test("aaa")}}
     <v-layout row>
       <v-flex xs12 sm12 md12>
           <v-text-field
@@ -101,7 +103,7 @@
 </template>
 
 <script>
-  import { TEST_LIST, LOGIN_USER, ADD_USER } from '../store/mutation-types'
+  import { TEST_LIST, LOGIN_USER, ADD_USER, SCHEDULE_LIST } from '../store/mutation-types'
 
   export default {
     name: 'login'
@@ -114,6 +116,7 @@
           ,name: this.userName
         }
         this.$store.dispatch('LOGIN_USER',userItem)
+        this.$store.dispatch('SCHEDULE_LIST',userItem)
       }
       ,addUser: function(){
         let addUserItem = {
@@ -121,6 +124,15 @@
           ,password: this.addPassword
         }
         this.$store.dispatch('ADD_USER',addUserItem)
+      },
+      test (data) {
+        let testItem = []
+        this.$_.each(this.testData, (item) => {
+            console.log(item)
+            testItem.push(item)
+            testItem.push(data)
+        })
+        return testItem
       }
     }
     ,data: function () {
@@ -133,6 +145,7 @@
         ,addPassword: null
         ,confirmPassword: null
         ,dialog: false
+        ,testData: [1,2,3,4,5]
       }
     }
   }
