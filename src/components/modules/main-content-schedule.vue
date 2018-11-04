@@ -68,22 +68,22 @@ export default {
       schedulDaialog: false,
       setData: null,
 
-      // テストデータ
+      // ヂ�トデータ
       scheduleList: [
         {
           date: '2018/12/12',
           time: '11:54',
-          category: '大会'
+          category: '大�
         },
         {
           date: '2019/1/12',
           time: '13:12',
-          category: '練習'
+          category: '練�
         },
         {
           date: '2020/8/29',
           time: '20:12',
-          category: '練習試合'
+          category: '練習試�
         }
       ]
     }
