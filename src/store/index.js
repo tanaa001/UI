@@ -17,7 +17,7 @@ let params = new URLSearchParams()
 const axioss = Axios.create({
 	baseURL: LOCAL_API
 	,headers: {
-		'content-Type': 'application/json'
+		'content-Type': 'application/json '
 		,'X-Requested-With': 'XMLHttpRequest'
 	}
 	,proxy: false
